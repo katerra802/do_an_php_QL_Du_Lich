@@ -9,17 +9,19 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+    // ...
     public function up(): void
     {
         Schema::create('user_profiles', function (Blueprint $table) {
-            $table->id(); // Tạo cột 'id' tự tăng
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('FullName');
             $table->date('DateOfBirth');
             $table->string('PhoneNumber', 20);
             $table->string('CCCD', 20)->nullable();
             $table->boolean('IsDefault')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

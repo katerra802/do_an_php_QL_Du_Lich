@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('tour_images', function (Blueprint $table) {
-            $table->id(); // Tạo cột 'id' tự tăng
-            $table->foreignId('tour_id')->constrained('tours')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('tour_id')->constrained()->onDelete('cascade');
             $table->string('ImageURL');
             $table->string('Caption')->nullable();
             $table->timestamps();

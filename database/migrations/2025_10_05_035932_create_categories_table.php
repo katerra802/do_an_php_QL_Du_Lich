@@ -9,13 +9,15 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
-        Schema::create('destinations', function (Blueprint $table) {
-            $table->id(); // Tạo cột 'id' tự tăng
-            $table->string('DestinationName');
-            $table->string('Country', 100);
+        Schema::create('categories', function (Blueprint $table) {
+            $table->id();
+            $table->string('CategoryName');
+            $table->text('Description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('destinations');
+        Schema::dropIfExists('categories');
     }
 };

@@ -12,12 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id(); // Tạo cột 'id' tự tăng
-            $table->foreignId('booking_id')->constrained('bookings')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('booking_id')->constrained()->onDelete('cascade');
             $table->dateTime('PaymentDate');
             $table->decimal('Amount', 15, 2);
             $table->string('PaymentMethod', 50);
-            $table->string('TransactionID')->nullable();
+            $table->string('TransactionID')->nullable(); // Mã giao dịch từ cổng thanh toán
             $table->enum('Status', ['Success', 'Failed', 'Pending'])->default('Pending');
             $table->timestamps();
         });

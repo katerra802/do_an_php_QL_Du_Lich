@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('bookings', function (Blueprint $table) {
-            $table->id(); // Tạo cột 'id' tự tăng
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('tour_id')->constrained('tours')->onDelete('cascade');
+            $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('tour_id')->constrained()->onDelete('cascade');
             $table->dateTime('BookingDate');
             $table->decimal('TotalPrice', 15, 2);
             $table->enum('Status', ['Pending', 'Confirmed', 'Cancelled'])->default('Pending');
