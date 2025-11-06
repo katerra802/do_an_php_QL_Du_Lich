@@ -1,16 +1,27 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('homepage.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/list-tours', function () {
-    return view('list-tours.list-tour');
-});
+// Tour Routes
+Route::get('/tours', [App\Http\Controllers\TourController::class, 'index'])->name('tours.index');
+Route::get('/tours/{id}', [App\Http\Controllers\TourController::class, 'show'])->name('tours.show');
+Route::post('/tours/{id}/calculate-price', [App\Http\Controllers\TourController::class, 'calculatePrice'])->name('tours.calculate-price');
+Route::post('/tours/{id}/booking', [App\Http\Controllers\TourController::class, 'booking'])->name('tours.booking');
 
+// Booking Routes
+Route::get('/bookings/{tourId}/create', [App\Http\Controllers\BookingController::class, 'create'])->name('bookings.create');
+Route::post('/bookings', [App\Http\Controllers\BookingController::class, 'store'])->name('bookings.store');
+Route::get('/bookings/{bookingId}/payment', [App\Http\Controllers\BookingController::class, 'payment'])->name('bookings.payment');
+Route::post('/bookings/{bookingId}/payment', [App\Http\Controllers\BookingController::class, 'processPayment'])->name('bookings.processPayment');
+Route::get('/bookings/{bookingId}/confirmation', [App\Http\Controllers\BookingController::class, 'confirmation'])->name('bookings.confirmation');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/my-bookings', [App\Http\Controllers\BookingController::class, 'myBookings'])->name('bookings.myBookings');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

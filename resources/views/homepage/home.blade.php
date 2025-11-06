@@ -1,14 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Trang chủ - Du Lịch Việt Nam')
+@section('title', 'Home - Travel Thailand')
 
 @section('content')
 @include('homepage.components.hero')
 @include('homepage.components.popular-posts')
 @include('homepage.components.trending-destinations')
-@include('homepage.components.featured-spots')
-@include('homepage.components.promo-banner')
-@include('homepage.components.featured-spots')
-@include('homepage.components.customer-reviews')
-@include('homepage.components.newsletter')
+@include('homepage.components.why-choose-us')
+@include('homepage.components.featured-tours')
+@include('homepage.components.categories')
+@include('homepage.components.stats')
 @endsection
